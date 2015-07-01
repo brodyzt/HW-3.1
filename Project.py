@@ -42,6 +42,7 @@ def will_continue():
     print('Would you like to continue using the system or are you finished?')
     print('\n1.Continue\n2.Finish')
     choice = input('\nChoice: ')
+    clear_screen()
     if(choice == '1'):
         return True
     else:
@@ -62,6 +63,9 @@ def delete_city(name):
             file.write('{},{},{}\n'.format(city.name,city.latitude,city.longitude))
     file.close()
     return list(city for city in cities if city.name != name)
+def print_cities(list_of_cities):
+    for x in range(len(list_of_cities)):
+            print(str(x+1) + '.' + list_of_cities[x].name)
 
 cities = list_of_cities()
 
@@ -69,14 +73,13 @@ running = True
 
 while(running):
     print('Welcome to the bus network. What would you like to do?')
-    print('\n1.Calculate distance\n2.Add City\n3.Delete City\n')
+    print('\n1.Calculate distance\n2.List Current City Options\n3.Add City\n4.Delete City\n')
     choice = input('Choice: ')
     clear_screen()
 
     if(choice == '1'):
         print('The following list are cities with bus stops. Please select a departure city and an arrival city.\n')
-        for x in range(len(cities)):
-            print(str(x+1) + '.' + cities[x].name)
+        print_cities(cities)
         city1 = cities[int(input('\nDeparture city: ')) - 1]
         city2 = cities[int(input('Arrival city: ')) - 1]
         distance = dis_bet_cities(city1,city2)
@@ -86,14 +89,21 @@ while(running):
         running = will_continue()
 
     if(choice == '2'):
+        print_cities(cities)
+        input('\nHit enter when done')
+        clear_screen()
+        running = will_continue()
+
+    if(choice == '3'):
         print('Please enter the details of the city you would like to add\nIf the coordinates are in the Northern or Western hemispheres, don\'t forget the negative sign\n')
         name = input('Name: ')
         latitude = float(input('Latitude: '))
         longitude = float(input('Longitude: '))
         add_city(City(name,latitude,longitude))
         clear_screen()
+        running = will_continue()
 
-    if(choice == '3'):
+    if(choice == '4'):
         print('Please select which city you would like to delete\n')
         for x in range(len(cities)):
             print(str(x+1) + '.' + cities[x].name)
@@ -102,6 +112,7 @@ while(running):
             city_name = cities[int(choice) - 1].name
             cities = delete_city(city_name)
         clear_screen()
+        running = will_continue()
 
 
 
