@@ -93,49 +93,9 @@ class ProgramStartup():
             list.append(temp_person)
         return list
 
-    def get_seats:
-
-class Sort():
-
     @staticmethod
-    def bubble(list):
-        is_sorted = False
-        while not is_sorted:
-            is_sorted = True
-            for x in range(len(list) - 1):
-                if(list[x] > list[x+1]):
-                    temp = list[x]
-                    list[x] = list[x+1]
-                    list[x+1] = temp
-                    is_sorted = False
-        return list
-    @staticmethod
-    def selection(list):
-        for x in range(0, len(list) - 1):
-            temp_lowest = list[x]
-            temp_lowest_location = x
-            for y in range(x + 1, len(list)):
-                if list[y] < temp_lowest:
-                    temp_lowest = list[y]
-                    temp_lowest_location = y
-            temp = list[x]
-            list[x] = list[temp_lowest_location]
-            list[temp_lowest_location] = temp
-        return list
-    @staticmethod
-    def insertion(list):
-        temp_list = []
-        list_length = len(list)
-        for x in range(list_length):
-            min = list[0]
-            min_loc = 0
-            for y in range(1, len(list)):
-                if list[y] < list[min_loc]:
-                    min = list[y]
-                    min_loc = y
-            temp_list.append(list[min_loc])
-            list.pop(min_loc)
-        return temp_list
+    def get_seats():
+        pass
 
 def dis_bet_cities(city1, city2):
     lat1 = math.radians(city1.latitude)
