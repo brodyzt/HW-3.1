@@ -2,5 +2,5 @@ Bus_ID,Seat Rows,Seat Columns,Departure,Arrival
 0,20,6,Boston,Chicago
 1,30,5,Boston,NYC
 2,10,3,NYC,Chicago
-3,8,2,Toronto,Boston
+3,10,5,Toronto,Boston
 4,40,8,Toronto,Chicago
