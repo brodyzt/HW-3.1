@@ -1,4 +1,4 @@
-ID, Name, Age, Bus ID
+Name,Latitude,Longitude
 0,John,21,0
 1,Ben,15,3
 2,Melissa,18,2

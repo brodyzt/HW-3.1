@@ -3,8 +3,10 @@ import math
 class EmptySeatFound(Exception): pass
 
 class Person:
-    def __init__(self, id=None, name=None, age=None, bus_id=None, personality=None):
-        self.id = id
+    counter = 0
+
+    def __init__(self, name=None, age=None, bus_id=None, personality=None):
+        self.id = self.counter
         self.name = name
         self.age = age
         self.bus_id = bus_id
@@ -52,7 +54,8 @@ class Bus:
             for seat in row:
                 if not seat.is_filled:
                     return False
-        return True
+        else:
+            return True
 
     def add_person(self, person):
         for row in self.seats:
@@ -104,6 +107,7 @@ class ProgramStartup():
             temp_person.age = int(attributes[2])
             temp_person.bus_id = attributes[3].replace('\n','')
             list.append(temp_person)
+            Person.counter += 1
         return list
 
     @staticmethod
@@ -191,6 +195,7 @@ def add_person(new_person):
     for person in temp_people:
         file.write('{},{},{},{}\n'.format(person.id,person.name,person.age,person.bus_id))
     file.close()
+    ProgramStartup.seat_people()
 
 ##Program begins
 
@@ -215,13 +220,11 @@ while(running):
         clear_screen()
         print('\nThe distance between {} and {} is {} miles'.format(city1.name,city2.name,dis_bet_cities(city1,city2)))
         print_lines(5)
-        running = will_continue()
 
     if choice == '2':
         print_cities(cities)
         input('\nHit enter when done')
         clear_screen()
-        running = will_continue()
 
     if choice == '3':
         print('Please enter the details of the city you would like to add\nIf the coordinates are in the Northern or Western hemispheres, don\'t forget the negative sign\n')
@@ -230,7 +233,6 @@ while(running):
         longitude = float(input('Longitude: '))
         add_city(City(name,latitude,longitude))
         clear_screen()
-        running = will_continue()
 
     if choice == '4':
         print('Please select which city you would like to delete\n')
@@ -241,7 +243,6 @@ while(running):
             city_name = cities[int(choice) - 1].name
             cities = delete_city(city_name)
         clear_screen()
-        running = will_continue()
 
     if choice == '5':
         print('These are the following buses and their info:\n')
@@ -262,9 +263,16 @@ while(running):
 
         print('\nPlease select from one of the following buses for the person to join.')
         temp_bus_list = ProgramStartup.get_open_buses()
-        for x in range(len(temp_bus_list)):
-            print('{}. Departure City: {}, Arrival City: {}'.format(x+1,temp_bus_list[x].departure_city,temp_bus_list[x].arrival_city))
+        for bus in temp_bus_list:
+            print('{}. Departure City: {}, Arrival City: {}'.format(bus.id,bus.departure_city,bus.arrival_city))
 
+        bus_choice = input('\nChoice: ')
+        while not bus_choice in list(bus.id for bus in temp_bus_list):
+            print("You didn't enter a valid option. Please try again")
+            bus_choice = input('Choice: ')
+        add_person(Person(temp_name, temp_age, bus_choice))
+
+    running = will_continue()
 
 
 #print('The distance between {} and {} is {} miles'.format(portland.name,tokyo.name,dis_bet_cities(portland,tokyo)))
