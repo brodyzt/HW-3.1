@@ -1,0 +1,6 @@
+Bus_ID,Departure,Arrival
+0,Boston,Chicago
+1,Boston,NYC
+2,NYC,Chicago
+3,Toronto,Boston
+4,Toronto,Chicago

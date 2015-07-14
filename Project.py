@@ -3,12 +3,11 @@ import math
 class EmptySeatFound(Exception): pass
 
 class Person:
-    def __init__(self, id=None, name=None, age=None, departure_city=None, arrival_city=None, personality=None):
+    def __init__(self, id=None, name=None, age=None, bus_id=None, personality=None):
         self.id = id
         self.name = name
         self.age = age
-        self.departure_city = departure_city
-        self.arrival_city = arrival_city
+        self.bus_id = bus_id
         self.personality = personality
 
     def get_data(self):
@@ -16,8 +15,7 @@ class Person:
         list.append(self.id)
         list.append(self.name)
         list.append(self.age)
-        list.append(self.departure_city)
-        list.append(self.arrival_city)
+        list.append(self.bus_id)
         list.append(self.personality)
         return list
 class Seat:
@@ -56,8 +54,9 @@ class Bus:
     def string_format(self):
         pass
 class City:
-    def __init__(self, name, latitude, longitude):
+    def __init__(self, name, state, latitude, longitude):
         self.name = name
+        self.state = state
         self.latitude = latitude
         self.longitude = longitude
 
@@ -71,7 +70,7 @@ class ProgramStartup():
         contents.pop(0)
         for line in contents:
             current_city = line.split(',')
-            list.append(City(current_city[0],float(current_city[1]),float(current_city[2])))
+            list.append(City(current_city[0],current_city[1],float(current_city[2]),float(current_city[3])))
         file.close()
         return list
 
@@ -87,14 +86,11 @@ class ProgramStartup():
             temp_person.id = int(attributes[0])
             temp_person.name = attributes[1]
             temp_person.age = int(attributes[2])
-            temp_person.departure_city = attributes[3]
-            temp_person.arrival_city = attributes[4]
-            temp_person.personality = int(attributes[5])
+            temp_person.bus_id = int(attributes[3])
             list.append(temp_person)
         return list
 
-    @staticmethod
-    def get_seats():
+    def seat_people(self):
         pass
 
 def dis_bet_cities(city1, city2):
@@ -121,21 +117,23 @@ def will_continue():
     else:
         return False
 def add_city(new_city):
-    temp_cities = list_of_cities()
+    temp_cities = ProgramStartup.get_cities()
     temp_cities.append(new_city)
-    cities.append(new_city)
+    ProgramStartup.get_cities().append(new_city)
     file = open('Cities','w')
+    file.write('Name,Latitude,Longitude\n')
     for city in temp_cities:
         file.write('{},{},{}\n'.format(city.name,city.latitude,city.longitude))
     file.close()
 def delete_city(name):
-    temp_cities = list_of_cities()
+    temp_cities = ProgramStartup.get_cities()
     file = open('Cities','w')
+    file.write('Name,Latitude,Longitude\n')
     for city in temp_cities:
         if(city.name != name):
             file.write('{},{},{}\n'.format(city.name,city.latitude,city.longitude))
     file.close()
-    return list(city for city in cities if city.name != name)
+    return list(city for city in ProgramStartup.get_cities() if city.name != name)
 def print_cities(list_of_cities):
     for x in range(len(list_of_cities)):
             print(str(x+1) + '.' + list_of_cities[x].name)
@@ -147,10 +145,9 @@ def city_with_name(city_name, list_input):
 
 
 def bus_network():
+
     cities = ProgramStartup.get_cities()
     people = ProgramStartup.get_people()
-
-    print(people[0].get_data())
 
     running = True
     while(running):
