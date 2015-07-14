@@ -1,4 +1,4 @@
-Name,Latitude,Longitude
+PersonID,Name,Age,BusID
 0,John,21,0
 1,Ben,15,3
 2,Melissa,18,2
@@ -6,9 +6,9 @@ Name,Latitude,Longitude
 4,Zack,20,1
 5,Jennifer,5,4
 6,Emma,12,4
-7,Tyler,3,2
+7,Tyler,99,2
 8,David,15,0
-9,Katie,6,5
+9,Katie,29,5
 10,Kelly,30,2
 11,Ben,45,3
 12,Josh,52,1

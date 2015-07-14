@@ -137,7 +137,6 @@ class ProgramStartup():
                 if person.bus_id == bus.id:
                     bus.add_person(person)
 
-
 def dis_bet_cities(city1, city2):
     lat1 = math.radians(city1.latitude)
     lat2 = math.radians(city2.latitude)
