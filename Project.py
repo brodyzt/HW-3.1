@@ -190,7 +190,7 @@ def add_person(new_person):
     temp_people = ProgramStartup.get_people()
     temp_people.append(new_person)
     file = open('People','w')
-    file.write('Name,Latitude,Longitude\n')
+    file.write('PersonID,Name,Age,BusID\n')
     for person in temp_people:
         file.write('{},{},{},{}\n'.format(person.id,person.name,person.age,person.bus_id))
     file.close()
