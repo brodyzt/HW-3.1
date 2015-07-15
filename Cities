@@ -1,8 +1,7 @@
-Name,State,Latitude,Longitude
-Chicago,IL,-41.8369,-87.6847
+Name,Latitude,Longitude
 Boston,MA,-42.3601,-71.0589
 NYC,NY,-40.7127,-74.0059
 Detroit,MI,-42.3314,-83.0458
-LA,California,-34.0500,-118.2500
-San Francisco,California,-37.7833,-122.4167
-Toronto,Canada,-43.7000,-79.4000
+LA,CA,-34.05,-118.25
+San Francisco,CA,-37.7833,-122.4167
+Toronto,Canada,-43.7,-79.4
